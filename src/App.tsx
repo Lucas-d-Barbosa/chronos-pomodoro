@@ -1,12 +1,22 @@
-import { Heading } from "./components/Heading";
 import "./styles/global.css";
 import "./styles/theme.css";
-
+import { Container } from "./components/Container";
+import { Heading } from "./components/Heading";
 export function App() {
   return (
     <>
-      <Heading />
-      <h2>Como vai?</h2>
+      <Container>
+        <Heading>LOGO</Heading>
+      </Container>
+      <Container>
+        <Heading>MENU</Heading>
+      </Container>
+      <Container>
+        <Heading>FORMULÁRIO</Heading>
+      </Container>
+      <Container>
+        <Heading>FOOTER</Heading>
+      </Container>
     </>
   );
 }

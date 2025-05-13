@@ -1,0 +1,12 @@
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: var(--gray-100);
+}
