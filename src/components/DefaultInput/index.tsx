@@ -13,7 +13,13 @@ export function DefaultInput({
   return (
     <>
       {labeltext && <label htmlFor={id}>{labeltext}</label>}
-      <input type={type} id={id} {...rest} />
+      <input
+        type={type}
+        id={id}
+        {...rest}
+        className={styles.input}
+        placeholder="Digite algo..."
+      />
     </>
   );
 }
