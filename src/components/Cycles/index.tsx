@@ -1,7 +1,6 @@
 import styles from "./style.module.css";
 
 export function Cycles() {
-  console.log(styles);
   return (
     <div className={styles.cycles}>
       <span>Ciclos:</span>

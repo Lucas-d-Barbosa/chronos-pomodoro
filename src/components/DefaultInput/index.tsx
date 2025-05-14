@@ -9,7 +9,6 @@ export function DefaultInput({
   type,
   ...rest
 }: DefaultInputProp) {
-  console.log(styles);
   return (
     <>
       {labeltext && <label htmlFor={id}>{labeltext}</label>}
