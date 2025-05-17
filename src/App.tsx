@@ -1,5 +1,5 @@
 import { Container } from "./components/Container";
-import { Heading } from "./components/Heading";
+// import { Heading } from "./components/Heading";
 import { CountDown } from "./components/CountDown";
 import { Logo } from "./components/Logo";
 import { Menu } from "./components/Menu";
@@ -10,23 +10,10 @@ import { DefaulButton } from "./components/DefaultButton";
 import { PlayCircleIcon } from "lucide-react";
 import "./styles/global.css";
 import "./styles/theme.css";
-import { useState } from "react";
 
 export function App() {
-  // const [numero, setNumero] = useState(() => {
-  //   console.log("Lazy initialization");
-  //   return 0;
-  // });
-  const [numero, setNumero] = useState(0);
-
-  function handleClick(): void {
-    setNumero((prevState) => prevState + 1);
-  }
-
   return (
     <>
-      <Heading>Número: {numero}</Heading>
-      <button onClick={handleClick}>Aumenta Número</button>
       <Container>
         <Logo />
       </Container>
@@ -42,11 +29,7 @@ export function App() {
       <Container>
         <form action="" className="form">
           <div className="formRow">
-            <DefaultInput
-              id="meuInput"
-              labeltext={numero.toString()}
-              type="text"
-            />
+            <DefaultInput id="meuInput" labeltext="Task" type="text" />
           </div>
 
           <div className="formRow">
