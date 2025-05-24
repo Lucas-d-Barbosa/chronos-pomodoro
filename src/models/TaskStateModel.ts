@@ -1,6 +1,6 @@
 import type { TaskModel } from "./TaskModel";
 export type TaskStateModel = {
-  task: TaskModel[];
+  tasks: TaskModel[];
   secondsRemainig: number;
   formattedSecondsRemainig: string;
   activeTask: TaskModel | null;
