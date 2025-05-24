@@ -6,7 +6,7 @@
   min-width: 24rem;
   padding: 0.8rem;
   border-radius: 0.8rem;
-  margin: 3.2rem 0;
+  margin: 1.6rem 0;
   cursor: pointer;
   transition: 0.1s ease-in-out;
 }
@@ -28,4 +28,14 @@
 .green {
   background-color: var(--primary);
   color: var(--text-over-primary);
+}
+
+.green {
+  background-color: var(--primary);
+  color: var(--text-over-primary);
+}
+
+.yellow {
+  background-color: var(--warning);
+  color: var(--text-over-warnig);
 }

@@ -1,7 +1,7 @@
 import { DefaultInput } from "../DefaultInput";
 import { Cycles } from "../Cycles";
 import { DefaulButton } from "../DefaultButton";
-import { PlayCircleIcon } from "lucide-react";
+import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { useRef } from "react";
 import type { TaskModel } from "../../models/TaskModel";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
@@ -52,6 +52,17 @@ export function MainForm() {
       };
     });
   }
+
+  function handleInterruptTask() {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        activeTask: null,
+        secondsRemainig: 0,
+        formattedSecondsRemainig: "00:00",
+      };
+    });
+  }
   return (
     <form action="" className="form" onSubmit={handleCreateNewTask}>
       <div className="formRow">
@@ -60,6 +71,7 @@ export function MainForm() {
           labeltext="Task"
           type="text"
           ref={taskNameInput}
+          disabled={!!state.activeTask}
         />
       </div>
 
@@ -73,7 +85,33 @@ export function MainForm() {
         </div>
       )}
       <div className="formRow">
-        <DefaulButton type="submit" icon={<PlayCircleIcon />} />
+        {!state.activeTask ? (
+          <DefaulButton
+            aria-label="Iniciar nova tarefa."
+            title="Iniciar nova tarefa."
+            type="submit"
+            icon={<PlayCircleIcon />}
+            key={"botao_submit"}
+          />
+        ) : (
+          <DefaulButton
+            aria-label="Finalizar tarefa atual."
+            title="Finalizar tarefa atual."
+            type="button"
+            color="red"
+            icon={<StopCircleIcon />}
+            onClick={handleInterruptTask}
+            key={"botao_finalizar"}
+          />
+        )}
+        <DefaulButton
+          aria-label="Pausar tarefa atual."
+          title="Pausar tarefa atual."
+          type="button"
+          color="yellow"
+          icon={<PauseCircleIcon />}
+          key={"botao_pausar"}
+        />
       </div>
     </form>
   );
