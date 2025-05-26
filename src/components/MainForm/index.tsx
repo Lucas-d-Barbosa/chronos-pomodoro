@@ -42,6 +42,13 @@ export function MainForm() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+    const worker = new Worker(
+      new URL("../../workes/timerWorker.js", import.meta.url)
+    );
+
+    worker.onmessage = function (event) {
+      console.log("PRINCIPAL RECEBEU:", event.data);
+    };
   }
 
   function handleInterruptTask() {
