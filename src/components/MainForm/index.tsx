@@ -9,6 +9,7 @@ import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 import { TaskActionTypes } from "../../contexts/TaskContext/TaskActions";
 import { Tips } from "../Tips";
+import { TimerWorkerMenager } from "../../workes/TimerWorkerManager";
 // import { formatSecondsToMinutes } from "../../utils/formatSecondsToMinutes";
 
 export function MainForm() {
@@ -42,13 +43,11 @@ export function MainForm() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
-    const worker = new Worker(
-      new URL("../../workes/timerWorker.js", import.meta.url)
-    );
-
-    worker.onmessage = function (event) {
-      console.log("PRINCIPAL RECEBEU:", event.data);
-    };
+    const worker = TimerWorkerMenager.getInstance();
+    worker.postMessage("Olá, mundo!");
+    worker.onmessage(() => {
+      console.log("AQUI, AMIGO");
+    });
   }
 
   function handleInterruptTask() {
