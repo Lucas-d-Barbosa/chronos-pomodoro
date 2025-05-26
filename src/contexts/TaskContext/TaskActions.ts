@@ -21,7 +21,6 @@ export type TaskActionModel =
     }
   | {
       type: TaskActionTypes.INTERRUPT_TASK;
-      payload: TaskModel;
     }
   | {
       type: TaskActionTypes.PAUSE_TASK;
