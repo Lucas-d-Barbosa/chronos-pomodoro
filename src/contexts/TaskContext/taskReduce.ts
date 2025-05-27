@@ -38,8 +38,36 @@ export function taskReduce(
         }),
       };
     }
+
+    case TaskActionTypes.COMPLETE_TASK: {
+      return {
+        ...state,
+        activeTask: null,
+        secondsRemainig: 0,
+        formattedSecondsRemainig: "00:00",
+        tasks: state.tasks.map((task) => {
+          if (task.id === state.activeTask?.id) {
+            task = {
+              ...task,
+              completeDate: Date.now(),
+            };
+          }
+          return task;
+        }),
+      };
+    }
     case TaskActionTypes.PAUSE_TASK: {
       return state;
+    }
+
+    case TaskActionTypes.COUNT_DOWN: {
+      return {
+        ...state,
+        secondsRemainig: action.payload.secondsRemaining,
+        formattedSecondsRemainig: formatSecondsToMinutes(
+          action.payload.secondsRemaining
+        ),
+      };
     }
   }
 
