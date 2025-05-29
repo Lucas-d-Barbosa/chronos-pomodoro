@@ -57,7 +57,7 @@ export function MainForm() {
       <div className="formRow">
         <DefaultInput
           id="meuInput"
-          labeltext="Task"
+          labeltext="Digite uma tarefa:"
           type="text"
           ref={taskNameInput}
           disabled={!!state.activeTask}
