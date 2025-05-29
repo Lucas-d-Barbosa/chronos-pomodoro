@@ -3,6 +3,7 @@ import { GenericHtml } from "../../components/GenericHtml";
 import { Heading } from "../../components/Heading";
 import { MainTemplate } from "../../templates/MainTemplate";
 import style from "./styles.module.css";
+import { RouterLink } from "../../components/RouterLink";
 export function NotFound() {
   return (
     <MainTemplate>
@@ -15,8 +16,9 @@ export function NotFound() {
               Talvez o link esteja quebrado ou a página tenha sido removida.
             </p>
             <p>
-              Você pode <a href="/">voltar para a página inicial</a> e continuar
-              sua jornada por lá.
+              Você pode{" "}
+              <RouterLink href="/">voltar para a página inicial</RouterLink> e
+              continuar sua jornada por lá.
             </p>
           </div>
         </Container>
