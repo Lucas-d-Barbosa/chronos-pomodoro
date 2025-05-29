@@ -1,7 +1,7 @@
 import { DefaultInput } from "../DefaultInput";
 import { Cycles } from "../Cycles";
 import { DefaulButton } from "../DefaultButton";
-import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon } from "lucide-react";
+import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { useRef } from "react";
 import type { TaskModel } from "../../models/TaskModel";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
@@ -87,14 +87,6 @@ export function MainForm() {
             key={"botao_finalizar"}
           />
         )}
-        <DefaulButton
-          aria-label="Pausar tarefa atual."
-          title="Pausar tarefa atual."
-          type="button"
-          color="yellow"
-          icon={<PauseCircleIcon />}
-          key={"botao_pausar"}
-        />
       </div>
     </form>
   );

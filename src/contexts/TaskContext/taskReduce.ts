@@ -56,10 +56,6 @@ export function taskReduce(
         }),
       };
     }
-    case TaskActionTypes.PAUSE_TASK: {
-      return state;
-    }
-
     case TaskActionTypes.COUNT_DOWN: {
       return {
         ...state,
