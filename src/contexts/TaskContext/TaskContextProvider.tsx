@@ -19,7 +19,6 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
     const countDownSeconds = e.data;
     if (countDownSeconds < 0) {
       if (playBeepRef.current) {
-        console.log("Tocando o áudio...");
         playBeepRef.current();
         playBeepRef.current = null;
       }
@@ -43,10 +42,8 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
 
   useEffect(() => {
     if (state.activeTask && playBeepRef.current === null) {
-      console.log("Carregando o áudio...");
       playBeepRef.current = loadBeep();
     } else {
-      console.log("Zerando o áudio...");
       playBeepRef.current = null;
     }
   }, [state.activeTask]);
