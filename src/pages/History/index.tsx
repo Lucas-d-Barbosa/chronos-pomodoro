@@ -10,6 +10,9 @@ import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
 export function History() {
   const { state } = useTaskContext();
+  const sortedTasks = [...state.tasks].sort((a, b) => {
+    return b.startDate - a.startDate;
+  });
   return (
     <MainTemplate>
       <Container>
@@ -38,24 +41,22 @@ export function History() {
               </tr>
             </thead>
             <tbody>
-              {state.tasks
-                .map((task) => {
-                  const taskTypeDicionary = {
-                    workTime: "Tempo de trabalho",
-                    shortBreakTime: "Descanso Curto",
-                    longBreakTime: "Descanso Longo",
-                  };
-                  return (
-                    <tr key={task.id}>
-                      <td>{task.name}</td>
-                      <td>{task.duration} min</td>
-                      <td>{formatDate(task.startDate)}</td>
-                      <td>{getTaskStatus(task, state.activeTask)}</td>
-                      <td>{taskTypeDicionary[task.type]}</td>
-                    </tr>
-                  );
-                })
-                .reverse()}
+              {sortedTasks.map((task) => {
+                const taskTypeDicionary = {
+                  workTime: "Tempo de trabalho",
+                  shortBreakTime: "Descanso Curto",
+                  longBreakTime: "Descanso Longo",
+                };
+                return (
+                  <tr key={task.id}>
+                    <td>{task.name}</td>
+                    <td>{task.duration} min</td>
+                    <td>{formatDate(task.startDate)}</td>
+                    <td>{getTaskStatus(task, state.activeTask)}</td>
+                    <td>{taskTypeDicionary[task.type]}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
