@@ -71,10 +71,15 @@ export function taskReduce(
       return { ...initialTaskState };
     }
     case TaskActionTypes.RESUME_TASK: {
+      const resumed = {
+        ...action.payload!,
+        startDate: Date.now(), // redefine início
+      };
       return {
         ...state,
-        activeTask: action.payload,
+        activeTask: resumed,
         pausedTask: null,
+        // mantém secondsRemainig e formattedSecondsRemainig
       };
     }
 
