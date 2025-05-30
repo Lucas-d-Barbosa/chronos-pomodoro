@@ -1,7 +1,7 @@
 import { DefaultInput } from "../DefaultInput";
 import { Cycles } from "../Cycles";
 import { DefaulButton } from "../DefaultButton";
-import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
+import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { useRef } from "react";
 import type { TaskModel } from "../../models/TaskModel";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
@@ -16,7 +16,6 @@ export function MainForm() {
   const taskNameInput = useRef<HTMLInputElement>(null);
   const lastTaskName = state.tasks[state.tasks.length - 1]?.name || "";
 
-  // Ciclos
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
 
@@ -27,7 +26,6 @@ export function MainForm() {
     if (taskNameInput.current === null) return;
 
     const taskName = taskNameInput.current.value.trim();
-
     if (!taskName) {
       showMessage.warn("Digite o nome da tarefa.");
       return;
@@ -47,11 +45,24 @@ export function MainForm() {
     showMessage.success("Tarefa iniciada!");
   }
 
+  function handlePauseTask() {
+    if (!state.activeTask) return;
+    dispatch({ type: TaskActionTypes.PAUSE_TASK, payload: state.activeTask });
+    showMessage.success("Tarefa pausada!");
+  }
+
+  function handleResumeTask() {
+    if (!state.pausedTask) return;
+    dispatch({ type: TaskActionTypes.RESUME_TASK, payload: state.pausedTask });
+    showMessage.success("Tarefa retomada!");
+  }
+
   function handleInterruptTask() {
     showMessage.dissmiss();
     dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
     showMessage.error("Tarefa interrompida!");
   }
+
   return (
     <form action="" className="form" onSubmit={handleCreateNewTask}>
       <div className="formRow">
@@ -74,24 +85,50 @@ export function MainForm() {
           <Cycles />
         </div>
       )}
+
       <div className="formRow">
-        {!state.activeTask ? (
+        {!state.activeTask && !state.pausedTask && (
           <DefaulButton
             aria-label="Iniciar nova tarefa."
             title="Iniciar nova tarefa."
             type="submit"
             icon={<PlayCircleIcon />}
-            key={"botao_submit"}
+            key="botao_submit"
           />
-        ) : (
+        )}
+
+        {state.activeTask && (
+          <>
+            <DefaulButton
+              aria-label="Finalizar tarefa atual."
+              title="Finalizar tarefa atual."
+              type="button"
+              color="red"
+              icon={<StopCircleIcon />}
+              onClick={handleInterruptTask}
+              key="botao_finalizar"
+            />
+            <DefaulButton
+              aria-label="Pausar tarefa atual."
+              title="Pausar tarefa atual."
+              type="button"
+              color="yellow"
+              icon={<PauseCircleIcon />}
+              onClick={handlePauseTask}
+              key="botao_pausar"
+            />
+          </>
+        )}
+
+        {!state.activeTask && state.pausedTask && (
           <DefaulButton
-            aria-label="Finalizar tarefa atual."
-            title="Finalizar tarefa atual."
+            aria-label="Retomar tarefa pausada."
+            title="Retomar tarefa pausada."
             type="button"
-            color="red"
-            icon={<StopCircleIcon />}
-            onClick={handleInterruptTask}
-            key={"botao_finalizar"}
+            color="green"
+            icon={<PlayCircleIcon />}
+            onClick={handleResumeTask}
+            key="botao_retomar"
           />
         )}
       </div>

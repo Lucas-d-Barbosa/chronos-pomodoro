@@ -10,4 +10,5 @@ export type TaskStateModel = {
     shortBreakTime: number;
     longBreakTime: number;
   };
+  pausedTask?: TaskModel | null;
 };

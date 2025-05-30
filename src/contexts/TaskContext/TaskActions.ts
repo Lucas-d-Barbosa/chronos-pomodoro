@@ -14,6 +14,7 @@ export enum TaskActionTypes {
   RESET_STATE = "RESET_STATE",
   COUNT_DOWN = "COUNT_DOWN",
   COMPLETE_TASK = "COMPLETE_TASK",
+  RESUME_TASK = "RESUME_TASK",
 }
 
 export type TaskActionModel =
@@ -30,6 +31,11 @@ export type TaskActionModel =
     }
   | {
       type: TaskActionTypes.PAUSE_TASK;
+      payload: TaskModel | null;
+    }
+  | {
+      type: TaskActionTypes.RESUME_TASK; // ← adiciona este caso
+      payload: TaskModel;
     }
   | {
       type: TaskActionTypes.RESET_STATE;
