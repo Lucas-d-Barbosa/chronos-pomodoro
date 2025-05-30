@@ -36,6 +36,13 @@ export function History() {
       }),
     }));
   }, [state.tasks]);
+
+  useEffect(() => {
+    return () => {
+      showMessage.dissmiss();
+    };
+  }, []);
+
   function hendleSortTasks({ field }: Pick<SortTasksOptions, "field">) {
     const newDirection =
       sortedTasksOptions.direction === "desc" ? "asc" : "desc";

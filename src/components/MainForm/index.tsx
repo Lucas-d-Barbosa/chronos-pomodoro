@@ -74,7 +74,7 @@ export function MainForm() {
           labeltext="Digite uma tarefa:"
           type="text"
           ref={taskNameInput}
-          disabled={!!state.activeTask}
+          disabled={!!state.activeTask || !!state.pausedTask}
           defaultValue={lastTaskName}
         />
       </div>
