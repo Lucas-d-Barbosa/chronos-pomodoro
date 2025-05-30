@@ -1,6 +1,6 @@
 import { DefaultInput } from "../DefaultInput";
 import { Cycles } from "../Cycles";
-import { DefaulButton } from "../DefaultButton";
+import { DefaultButton } from "../DefaultButton";
 import { PauseCircleIcon, PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { useRef } from "react";
 import type { TaskModel } from "../../models/TaskModel";
@@ -47,12 +47,15 @@ export function MainForm() {
 
   function handlePauseTask() {
     if (!state.activeTask) return;
+    showMessage.dissmiss();
+
     dispatch({ type: TaskActionTypes.PAUSE_TASK, payload: state.activeTask });
     showMessage.success("Tarefa pausada!");
   }
 
   function handleResumeTask() {
     if (!state.pausedTask) return;
+    showMessage.dissmiss();
     dispatch({ type: TaskActionTypes.RESUME_TASK, payload: state.pausedTask });
     showMessage.success("Tarefa retomada!");
   }
@@ -88,7 +91,7 @@ export function MainForm() {
 
       <div className="formRow">
         {!state.activeTask && !state.pausedTask && (
-          <DefaulButton
+          <DefaultButton
             aria-label="Iniciar nova tarefa."
             title="Iniciar nova tarefa."
             type="submit"
@@ -99,7 +102,7 @@ export function MainForm() {
 
         {state.activeTask && (
           <>
-            <DefaulButton
+            <DefaultButton
               aria-label="Finalizar tarefa atual."
               title="Finalizar tarefa atual."
               type="button"
@@ -108,7 +111,7 @@ export function MainForm() {
               onClick={handleInterruptTask}
               key="botao_finalizar"
             />
-            <DefaulButton
+            <DefaultButton
               aria-label="Pausar tarefa atual."
               title="Pausar tarefa atual."
               type="button"
@@ -121,7 +124,7 @@ export function MainForm() {
         )}
 
         {!state.activeTask && state.pausedTask && (
-          <DefaulButton
+          <DefaultButton
             aria-label="Retomar tarefa pausada."
             title="Retomar tarefa pausada."
             type="button"

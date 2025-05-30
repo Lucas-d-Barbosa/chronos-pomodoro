@@ -84,11 +84,10 @@ export function taskReduce(
         activeTask: null,
         secondsRemainig: state.secondsRemainig,
         formattedSecondsRemainig: state.formattedSecondsRemainig,
-        pausedTask: state.activeTask, // novo campo
+        pausedTask: state.activeTask,
       };
     }
   }
 
-  // sempre deve retornar o estado
   return state;
 }

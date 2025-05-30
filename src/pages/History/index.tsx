@@ -2,7 +2,7 @@ import { TrashIcon } from "lucide-react";
 import { Container } from "../../components/Container";
 import { Heading } from "../../components/Heading";
 import { MainTemplate } from "../../templates/MainTemplate";
-import { DefaulButton } from "../../components/DefaultButton";
+import { DefaultButton } from "../../components/DefaultButton";
 
 import styles from "./Styles.module.css";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
@@ -10,9 +10,12 @@ import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
 import { useEffect, useState } from "react";
 import { sortTasks, type SortTasksOptions } from "../../utils/sortTasks";
+import { showMessage } from "../../adapters/showMessage";
 import { TaskActionTypes } from "../../contexts/TaskContext/TaskActions";
+
 export function History() {
   const { state, dispatch } = useTaskContext();
+  const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   const hasTasks = state.tasks.length > 0;
   const [sortedTasksOptions, setSortTaskOptions] = useState<SortTasksOptions>(
     () => {
@@ -48,9 +51,20 @@ export function History() {
   }
 
   function handleResetHistory() {
-    if (!confirm("Tem certeza que deseja apagar o histórico?")) return;
-    dispatch({ type: TaskActionTypes.RESET_STATE });
+    showMessage.dissmiss();
+    showMessage.confirm(
+      "Você tem certeza que desaja apagar o histórico?",
+      (confirmation) => {
+        setConfirmClearHistory(confirmation);
+      }
+    );
   }
+  useEffect(() => {
+    if (!confirmClearHistory) return;
+    setConfirmClearHistory(false);
+    showMessage.error("Histórico apagado.");
+    dispatch({ type: TaskActionTypes.RESET_STATE });
+  }, [confirmClearHistory, dispatch]);
   return (
     <MainTemplate>
       <Container>
@@ -58,13 +72,13 @@ export function History() {
           <span> History </span>
           {hasTasks && (
             <span className={styles.buttonContainer}>
-              <DefaulButton
+              <DefaultButton
                 icon={<TrashIcon />}
                 color="red"
                 aria-label="Apagar todo o histórico"
                 title="Apagar todo o histórico"
                 onClick={handleResetHistory}
-              ></DefaulButton>{" "}
+              ></DefaultButton>{" "}
             </span>
           )}
         </Heading>

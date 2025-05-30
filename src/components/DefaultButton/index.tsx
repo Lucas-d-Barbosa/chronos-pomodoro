@@ -3,7 +3,7 @@ type DefaulButtonProp = {
   icon: React.ReactNode;
   color?: "green" | "red" | "yellow";
 } & React.ComponentProps<"button">;
-export function DefaulButton({
+export function DefaultButton({
   type,
   icon,
   color = "green",
