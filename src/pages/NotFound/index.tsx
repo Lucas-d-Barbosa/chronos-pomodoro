@@ -4,7 +4,11 @@ import { Heading } from "../../components/Heading";
 import { MainTemplate } from "../../templates/MainTemplate";
 import style from "./styles.module.css";
 import { RouterLink } from "../../components/RouterLink";
+import { useEffect } from "react";
 export function NotFound() {
+  useEffect(() => {
+    document.title = "Página não encotrada - Chronos Pomodoro";
+  }, []);
   return (
     <MainTemplate>
       <GenericHtml>

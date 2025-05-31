@@ -36,7 +36,9 @@ export function History() {
       }),
     }));
   }, [state.tasks]);
-
+  useEffect(() => {
+    document.title = "Histórico - Chronos Pomodoro";
+  }, []);
   useEffect(() => {
     return () => {
       showMessage.dissmiss();
