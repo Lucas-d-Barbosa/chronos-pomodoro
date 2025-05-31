@@ -11,6 +11,7 @@ export function Footer() {
         <RouterLink href="/">
           Chronos Pomodoro &copy; {new Date().toLocaleString()} - Feito com{" "}
           <HeartIcon />
+          Desenvolvido por - Lucas Barbosa
         </RouterLink>
       </footer>
     </>
