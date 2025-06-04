@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Chronos Pomodoro",
+  "short_name": "Chronos Pomodoro",
   "icons": [
     {
       "src": "/images/favicon/web-app-manifest-192x192.png",
